@@ -24,4 +24,39 @@ const data = [
         "Yes of course, it is very possible to create an accordion component with another framework.",
     },
   ];
-  
+const accordionWrapper = document.querySelector('.accordion');
+
+function createAccordionData(){
+    accordionWrapper.innerHTML =
+    data.map((dataItem)=>{
+        `
+        <div class="accordion_item">
+        <div class="accordion_title">
+        <h3>${dataItem.question}</h3>
+        <i class="fa-solid fa-arrow-down"></i>
+        </div>
+        <div class="accordion-content">
+        <p>${dataItem.answer}</p>
+        </div>
+        </div>
+        `
+    }).join("");
+}
+
+createAccordionData();
+
+const getAccordionTitles = document.querySelectorAll('.accordion_title');
+
+getAccordionTitles.forEach(currentItem=>{
+    currentItem.addEventListener('click', (event)=>{
+        if(currentItem.classList.contains('active')){
+            currentItem.classList.remove('active')
+        }else {
+            let getAlreadyAddedActiveClasses = document.querySelectorAll('.active');
+            getAlreadyAddedActiveClasses.forEach(currentActiveItem =>{
+                currentActiveItem.classList.remove('active')
+            });
+            currentItem.classList.add('active');
+        }
+    })
+})
